@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BD Toolkit — Demo Version</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💊</text></svg>">
+<style>
+  :root {
+    --color-text-primary: #1a1a2e;
+    --color-text-secondary: #555;
+    --color-text-tertiary: #999;
+    --color-text-success: #3b6d11;
+    --color-text-info: #185fa5;
+    --color-text-warning: #854f0b;
+    --color-text-danger: #a32d2d;
+    --color-background-primary: #ffffff;
+    --color-background-secondary: #f5f5f0;
+    --color-background-tertiary: #eee;
+    --color-background-success: #eaf3de;
+    --color-background-info: #e6f1fb;
+    --color-background-warning: #faeeda;
+    --color-background-danger: #fcebeb;
+    --color-border-primary: rgba(0,0,0,0.4);
+    --color-border-secondary: rgba(0,0,0,0.3);
+    --color-border-tertiary: rgba(0,0,0,0.15);
+    --border-radius-md: 8px;
+    --border-radius-lg: 12px;
+    --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --color-text-primary: #e8e6e3;
+      --color-text-secondary: #a8a5a0;
+      --color-text-tertiary: #706d68;
+      --color-text-success: #97c459;
+      --color-text-info: #85b7eb;
+      --color-text-warning: #ef9f27;
+      --color-text-danger: #f09595;
+      --color-background-primary: #1e1e1e;
+      --color-background-secondary: #2a2a28;
+      --color-background-tertiary: #333330;
+      --color-background-success: #1a2e0a;
+      --color-background-info: #0c2d4a;
+      --color-background-warning: #2e2205;
+      --color-background-danger: #350e0e;
+      --color-border-primary: rgba(255,255,255,0.4);
+      --color-border-secondary: rgba(255,255,255,0.25);
+      --color-border-tertiary: rgba(255,255,255,0.12);
+    }
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: var(--font-sans);
+    background: var(--color-background-tertiary);
+    color: var(--color-text-primary);
+    padding: 16px;
+  }
+  #root {
+    max-width: 860px;
+    margin: 0 auto;
+    background: var(--color-background-primary);
+    border-radius: 16px;
+    padding: 20px 24px;
+    border: 0.5px solid var(--color-border-tertiary);
+  }
+  button { font-family: var(--font-sans); }
+  pre { font-family: var(--font-sans); }
+  @media (max-width: 600px) {
+    body { padding: 8px; }
+    #root { padding: 14px 16px; border-radius: 12px; }
+  }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.3.1/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.3.1/umd/react-dom.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.26.9/babel.min.js"></script>
+<script type="text/babel">
+const { useState } = React;
+
+const TEAL = "#0D7377";
+const GOLD = "#D4A017";
+const DARK = "#1A1A2E";
+
+const tiers = [
+  {
+    tier: 1,
+    label: "Tier 1 — Global pharma strategic partners",
+    desc: "Companies with active obesity deal mandates and budgets exceeding $1B for in-licensing.",
+    companies: [
+      {
+        name: "Novo Nordisk",
+        hq: "Bagsv\u00e6rd, Denmark",
+        localPresence: "Global offices; BIO conferences",
+        color: "#0067A5",
+        archetype: "Franchise protector",
+        leadHook: "Franchise protection — weight rebound prevention",
+        valueProposition: "Your biggest franchise risk is weight rebound. BMJ meta-analysis shows patients return to baseline weight within 1.7 years of stopping any weight management medication, and just 1.5 years for semaglutide/tirzepatide. [Lead Compound] achieves [X]% improvement in [key endpoint] vs [comparator] in preclinical models ([CRO Name], July 2025). As an oral, non-incretin mechanism that naturally triggers endogenous GLP-1 release, [Lead Compound] is the maintenance therapy that protects Wegovy\u2019s long-term franchise value \u2014 without competing with it.",
+        contacts: [
+          { name: "Partnering Team (S&E)", title: "Search, Evaluation & Transactions for obesity/diabetes", access: "partnering@novonordisk.com; BIO Partnering" },
+          { name: "Brian Vandahl", title: "SVP, Therapeutics Discovery", access: "Signed Vivtex deal (Feb 2026); warm intro via SAB" },
+          { name: "External Innovation (Board)", title: "AVP, External Innovation, Scientific Partnership", access: "BIO or ObesityWeek conference partnering" },
+        ],
+        warmPath: "[CMO Name] ([Client] CMO, ex-Novo Nordisk)",
+        recentDeals: "$2.2B Septerna, $2.1B Vivtex, $1B Lexicon, $4.7B Akero acquisition",
+        urgency: "Semaglutide LOE approaching. CEO Doustdar committed to pipeline breadth. Publicly stated \u2018must-wins\u2019 span late- and early-stage obesity R&D.",
+        emailSubject: "Oral novel target agonist \u2014 50% weight rebound reduction post-semaglutide (preclinical)",
+        emailBody: `Dear [Name],
+
+I\u2019m reaching out because weight rebound after GLP-1 discontinuation is emerging as the single biggest threat to long-term obesity franchise value. Our preclinical study ([CRO Name], July 2025) demonstrated that [Lead Compound], our oral novel target agonist, achieves [X]% improvement in [key endpoint] vs [comparator] in obese mice.
+
+[Client] is developing the only clinical-stage molecules targeting target tissue [Target Receptors] receptors. The mechanism works upstream of GLP-1: by reactivating novel targets that are downregulated in obesity, [Lead Compound] naturally triggers secretion of GLP-1, CCK, and PYY \u2014 inducing satiation through the body\u2019s own signaling.
+
+Where we are today:
+\u2022 Phase 1 complete: [N] subjects (27 healthy + 60 obese), no serious adverse events
+\u2022 Ongoing MAD: [X]% responder rate, \u22124.3% fat mass at 4 weeks with preserved skeletal muscle
+\u2022 [Regulatory Agency]-validated Phase 2 protocol ([Phase 2 Protocol]): [N] patients, 12-week treatment
+\u2022 Strong IP: patents through [year], FTO confirmed in EU and US
+
+We believe [Lead Compound] could serve as the maintenance therapy that protects long-term outcomes for patients on GLP-1 regimens. I\u2019d welcome 30 minutes to share the full dataset.
+
+Best regards,
+[CEO Name]
+CEO & Co-founder, [Client]
+[ceo@client.com] | [phone]`,
+      },
+      {
+        name: "Eli Lilly",
+        hq: "Indianapolis, IN",
+        localPresence: "R&D presence in Cambridge, MA",
+        color: "#C8102E",
+        archetype: "Pipeline builder / precision medicine",
+        leadHook: "Incretin add-on + body composition (lean mass preservation)",
+        valueProposition: "Lilly\u2019s published BD priorities explicitly list \u2018GLP-1/incretin add-on mechanisms\u2019 and \u2018body composition (preservation/promotion of lean body mass)\u2019 as key areas of interest. [Lead Compound] hits both: it triggers endogenous GLP-1/CCK/PYY release upstream via novel targets (incretin add-on), and our MAD study shows fat mass reduction with stable skeletal muscle mass (body composition). The mechanism works specifically in patients with downregulated receptors \u2014 a precision medicine approach that aligns with Lilly\u2019s stated focus on biomarker-driven patient selection.",
+        contacts: [
+          { name: "S&E Team, Cardiometabolic", title: "Search & Evaluation, Obesity/Metabolic Health", access: "lilly.com/science/partners portal; BIO Partnering" },
+          { name: "Ruth Gimeno, Ph.D.", title: "GVP, Diabetes, Obesity & Cardiometabolic Research", access: "Gateway Labs Scientific Board; conference panels" },
+          { name: "Kenneth Custer, Ph.D.", title: "EVP & President, Lilly Cardiometabolic Health", access: "Via [Advisor] (ex-Boehringer/Pfizer network)" },
+          { name: "Jacob Van Naarden", title: "EVP, Lilly Oncology + Corporate BD oversight", access: "Senior deal authority; approach via S&E first" },
+        ],
+        warmPath: "[Advisor Name] ([Client] advisor, ex-Pfizer/Boehringer network)",
+        recentDeals: "$1.3B Nimbus, $1.3B Superluminal, $1.2B SanegeneBio, $870M Camurus",
+        urgency: "Orforglipron approval expected 2026. Ruth Gimeno personally signed off on Versanis and Nimbus deals. Actively building next-gen pipeline.",
+        emailSubject: "First-in-class oral novel target agonist \u2014 incretin add-on with lean mass preservation",
+        emailBody: `Dear [Name],
+
+Lilly\u2019s published partnering priorities include GLP-1/incretin add-on mechanisms and body composition solutions. [Client]\u2019s [Lead Compound] addresses both.
+
+[Lead Compound] is a [modified molecule] that activates target tissue [Target Receptors] novel targets, triggering natural release of GLP-1, CCK, and PYY through the [novel pathway]. Critically, this mechanism works only in patients with downregulated receptors (i.e., obese individuals) \u2014 making it a precision medicine approach.
+
+Key clinical signals from our ongoing MAD study (n=18, 30 days):
+\u2022 [X]% of patients responded to treatment
+\u2022 [Compound 2] cohort: \u2212[X]% [primary endpoint], +0.36% skeletal muscle mass
+\u2022 Placebo/non-responders: +2.48% fat mass
+\u2022 Zero serious adverse events across [N]+ subjects dosed to date
+
+Mechanism is fully orthogonal to exogenous GLP-1, supporting combination potential. Preclinical data also show [X]% reduction in [key endpoint] post-semaglutide.
+
+Phase 2a ([Phase 2 Protocol], [N] patients, 12 weeks) is [Regulatory Agency]-validated and planned for S1 2027. We are currently raising \u20AC6-8M for this milestone.
+
+Would welcome a conversation about potential alignment.
+
+Best regards,
+[CEO Name]
+CEO & Co-founder, [Client]
+[ceo@client.com] | [phone]`,
+      },
+      {
+        name: "Roche",
+        hq: "Basel, Switzerland",
+        localPresence: "Genentech (S. San Francisco); global partnering",
+        color: "#003E7E",
+        archetype: "Weight maintenance seeker",
+        leadHook: "Weight maintenance drug \u2014 exactly what Roche\u2019s obesity head publicly requested",
+        valueProposition: "When asked what type of obesity asset would most attract Roche\u2019s attention, Dr. Manu Chakravarthy specifically said a \u2018weight maintenance\u2019 drug. [Lead Compound] is precisely that: our [CRO Name] preclinical study shows [X]% reduction in post-[comparator] weight rebound. Additionally, Roche dropped CT-173 (PYY analog) from its pipeline \u2014 [Lead Compound] achieves PYY release physiologically through a different pathway and fills that gap as an oral maintenance therapy alongside CT-388 or petrelintide.",
+        contacts: [
+          { name: "Roche Partnering Team", title: "Global Partnering organization", access: "roche.com/partnering; BIO Partnering" },
+          { name: "Manu Chakravarthy, M.D.", title: "VP & Global Head, CV/Renal/Metabolism Product Dev", access: "Publicly stated weight maintenance interest; conferences" },
+          { name: "Teresa Graham", title: "CEO, Roche Pharmaceuticals", access: "Senior; approach via Chakravarthy first" },
+        ],
+        warmPath: "Conference approach \u2014 Chakravarthy publicly accessible at investor events",
+        recentDeals: "$5.3B Zealand, $2.7B Carmot acquisition, 89bio acquisition",
+        urgency: "Targeting top-3 obesity player by 2030. Dropped their own PYY program (CT-173) \u2014 gap to fill. Actively stated interest in weight maintenance assets.",
+        emailSubject: "Oral weight maintenance therapy \u2014 novel novel target agonist, Phase 1 complete",
+        emailBody: `Dear Dr. Chakravarthy,
+
+At Roche\u2019s Pharma Day you mentioned that a weight maintenance drug would be the type of obesity asset most likely to attract Roche\u2019s attention. I\u2019m writing because that is precisely what [Client] is developing.
+
+[Lead Compound] is a first-in-class oral agonist of target tissue novel targets ([Target Receptors]). In obese individuals, these receptors are downregulated, leading to impaired satiation signaling. [Lead Compound] reactivates them, naturally inducing GLP-1, CCK, and PYY secretion.
+
+Our preclinical weight maintenance study ([CRO Name], 2025) showed [Lead Compound] achieves [X]% improvement in [key endpoint] vs [comparator]. In our ongoing first-in-human trials ([N]+ subjects), we see encouraging fat-mass-specific weight loss with preserved muscle mass and zero serious adverse events.
+
+Roche has dropped CT-173 (PYY analog) from its pipeline. [Lead Compound] achieves PYY release physiologically through a different pathway and could fill that gap as an oral maintenance therapy alongside CT-388 or petrelintide.
+
+We have an [Regulatory Agency]-validated Phase 2 protocol ready. Happy to share the complete dataset in a 30-minute call.
+
+Best regards,
+[CEO Name]
+CEO & Co-founder, [Client]
+[ceo@client.com] | [phone]`,
+      },
+      {
+        name: "AstraZeneca",
+        hq: "Cambridge, UK",
+        localPresence: "R&D hub in Waltham/Boston area",
+        color: "#830051",
+        archetype: "Late entrant / differentiation seeker",
+        leadHook: "Lean mass preservation \u2014 you acquired SixPeaks for this exact profile",
+        valueProposition: "AstraZeneca acquired SixPeaks Bio specifically for its lean-mass-preserving bispecific antibody in obesity. [Client]\u2019s ongoing human trial data shows the same profile: fat mass reduction with stable skeletal muscle mass at 4 weeks. [Lead Compound] is oral, non-incretin, and completely orthogonal to your existing GLP-1 pipeline (AZD5004, AZD6234, CSPC assets). It could serve as the oral maintenance/body composition layer alongside your injectable programs.",
+        contacts: [
+          { name: "BD Team, CVRM", title: "Partnering, CV/Renal/Metabolism", access: "astrazeneca.com/partnering; BIO Partnering" },
+          { name: "Sharon Barr", title: "EVP & Head of BioPharmaceuticals R&D", access: "Signed CSPC $18B deal; senior R&D decision-maker" },
+          { name: "CVRM Bioscience Heads", title: "Exec Directors, Bioscience Metabolism & CV", access: "AZ R&D leadership page; conference panels" },
+        ],
+        warmPath: "Conference approach; potential via AZ\u2019s CVRM team at BIO",
+        recentDeals: "$18.5B CSPC, SixPeaks acquisition ($300M), Eccogene, Regeneron collaboration",
+        urgency: "Building obesity portfolio at unprecedented speed. All current assets are incretin-based \u2014 needs non-incretin differentiation.",
+        emailSubject: "Only clinical-stage novel target agonist \u2014 differentiated oral mechanism for obesity",
+        emailBody: `Dear [Name],
+
+With 160+ obesity drugs in development and most targeting incretin pathways, differentiation is the key challenge for late entrants. [Client] offers something no one else has: the only clinical-stage novel target agonist.
+
+[Lead Compound] is an oral [modified molecule] that reactivates target tissue [Target Receptors] receptors \u2014 a completely novel mechanism that works upstream of gut hormone secretion. Rather than injecting exogenous GLP-1, [Lead Compound] triggers the body\u2019s own release of GLP-1, CCK, and PYY through the natural [novel pathway].
+
+This approach offers three key differentiators vs. current standard of care:
+1. Qualitative weight loss: fat mass reduction with preserved skeletal muscle
+2. No weight rebound: [X]% reduction in post-[comparator] rebound (preclinical)
+3. Clean safety: zero serious adverse events across [N]+ subjects (healthy and obese)
+
+We hold patents through [year] with confirmed FTO in EU and US. Our [Regulatory Agency]-validated Phase 2 protocol targets [N] patients over 12 weeks, with recruitment planned for S1 2027.
+
+This is a white-space opportunity with no competing programs in the novel target space. I\u2019d value 30 minutes to discuss how [Lead Compound] might complement your obesity strategy.
+
+Best regards,
+[CEO Name]
+CEO & Co-founder, [Client]
+[ceo@client.com] | [phone]`,
+      },
+      {
+        name: "Pfizer",
+        hq: "New York, NY",
+        localPresence: "R&D offices in Cambridge, MA",
+        color: "#0093D0",
+        archetype: "Late entrant / differentiation seeker",
+        leadHook: "White-space differentiation \u2014 the only novel target program in existence",
+        valueProposition: "With 160+ obesity drugs in development and most targeting incretin pathways, Pfizer needs a differentiated story after spending $10B on Metsera. [Lead Compound] offers the only clinical-stage novel target agonist \u2014 a completely novel mechanism with zero competition. [Client]\u2019s [modified molecule] works upstream of GLP-1 through the [novel pathway], offering a genuine first-in-class narrative that no other company can claim.",
+        contacts: [
+          { name: "BD Submissions Portal", title: "Business Development Group", access: "pfizer.com/about/partners/submit-your-opportunities" },
+          { name: "Chris Boshoff, M.D., Ph.D.", title: "CSO & President, R&D", access: "Quoted on obesity as strategic priority" },
+        ],
+        warmPath: "[Advisor Name] ([Client] advisor, former Pfizer BD exec) \u2014 DIRECT WARM INTRO",
+        recentDeals: "$10B Metsera, $150M YaoPharma (oral GLP-1)",
+        urgency: "Internal GLP-1 (danuglipron) had setbacks. Metsera gives pipeline but lacks non-incretin differentiation. Cardiometabolic declared strategic priority.",
+        emailSubject: "Only clinical-stage novel target agonist \u2014 differentiated oral mechanism for obesity",
+        emailBody: `[Uses same Archetype D template as AstraZeneca above \u2014 customize opening paragraph to reference Pfizer\u2019s Metsera acquisition and need for non-incretin differentiation]`,
+      },
+      {
+        name: "Boehringer Ingelheim",
+        hq: "Ingelheim, Germany",
+        localPresence: "US offices in Ridgefield, CT",
+        color: "#003865",
+        archetype: "Cardiometabolic portfolio builder",
+        leadHook: "Cardiometabolic expertise + survodutide synergy potential",
+        valueProposition: "Boehringer has survodutide (GLP-1/glucagon dual agonist, licensed to Zealand for obesity) showing 19% weight loss in Phase 2. [Lead Compound] could serve as an oral maintenance therapy post-survodutide treatment, addressing the rebound problem that affects all incretin-class drugs. Your cardiometabolic franchise (SGLT2, survodutide) creates a natural portfolio fit.",
+        contacts: [
+          { name: "BD/Licensing Team", title: "Cardiometabolic search & evaluation", access: "Via [Advisor] personal intro + BI partnering portal" },
+        ],
+        warmPath: "[Advisor Name] ([Client] advisor, 30 years at Boehringer, cardiometabolic BD) \u2014 HIGHEST PROBABILITY",
+        recentDeals: "Survodutide (via Zealand, Phase 3 obesity), SGLT2 franchise",
+        urgency: "Survodutide success has committed them to obesity. Need oral complement to injectable portfolio.",
+        emailSubject: "Oral maintenance therapy for post-incretin weight management \u2014 novel novel target agonist",
+        emailBody: `[Warm introduction via [Advisor] \u2014 email should be co-signed or preceded by [Advisor]\u2019s personal introduction. Focus on survodutide synergy and cardiometabolic portfolio fit.]`,
+      },
+    ],
+  },
+  {
+    tier: 2,
+    label: "Tier 2 — Boston-area partners & ecosystem",
+    desc: "Companies headquartered or with major R&D hubs in Boston/Cambridge/Waltham. Accessible for in-person meetings, particularly around BIO International (June 2026).",
+    companies: [
+      {
+        name: "Sanofi (Genzyme)",
+        hq: "Paris, France",
+        localPresence: "450 Water St, Cambridge Crossing \u2014 2,500+ staff, US HQ",
+        color: "#7B2D8E",
+        archetype: "Warm intro + CVC investment",
+        leadHook: "Anti-inflammatory pipeline + existing [Client] investor relationship",
+        valueProposition: "[Investor Name] ([Client] investor) is ex-Sanofi \u2014 direct warm introduction. Sanofi Ventures actively invests in cardiometabolic startups (NodThera, Korsana). [Client]\u2019s anti-inflammatory pipeline ([Lead Compound] for inflammation, in-vivo in progress) fits their CVC thesis. Secondary angle: Sanofi\u2019s remaining metabolic franchise could benefit from a differentiated oral asset.",
+        contacts: [
+          { name: "Sanofi Ventures (CVC)", title: "Corporate venture capital, cardiometabolic", access: "sanofiventures.com; Cambridge Crossing" },
+          { name: "BD/Partnering Team", title: "Global partnering", access: "sanofi.com/partnering" },
+        ],
+        warmPath: "[Investor Name] ([Client] investor, ex-Sanofi) \u2014 DIRECT WARM INTRO",
+        recentDeals: "Sanofi Ventures: NodThera, Korsana ($175M). Strategic pivot to immunology but CVC still active in metabolic.",
+        urgency: "Cambridge HQ enables in-person meeting on any Boston trip. Sanofi Ventures is most accessible path.",
+        emailSubject: null,
+        emailBody: null,
+      },
+      {
+        name: "Amgen",
+        hq: "Thousand Oaks, CA",
+        localPresence: "Major R&D hub in Cambridge, MA",
+        color: "#003DA5",
+        archetype: "Non-incretin combo partner",
+        leadHook: "Non-incretin combo partner for MariTide \u2014 \u2018obesity requires a variety of approaches\u2019",
+        valueProposition: "Amgen publicly stated obesity will require \u2018a variety of approaches\u2019 including non-incretin mechanisms. MariTide (anti-myostatin/activin) shows 24% weight loss in Phase 2. [Lead Compound] offers a complementary oral mechanism: MariTide works on body composition via muscle biology, [Lead Compound] addresses appetite regulation via novel targets. The combination could deliver both quantitative and qualitative weight loss.",
+        contacts: [
+          { name: "BD & Strategic Planning", title: "Cardiometabolic S&E", access: "amgen.com/partners; BIO Partnering" },
+          { name: "Cambridge R&D Team", title: "Obesity research hub", access: "Local networking; conferences" },
+        ],
+        warmPath: "BIO International (Boston, June 2026)",
+        recentDeals: "MariTide Phase 2 (24% weight loss), multiple obesity mechanisms stated",
+        urgency: "MariTide is injectable \u2014 needs oral assets. Cambridge team accessible for local meetings.",
+        emailSubject: null,
+        emailBody: null,
+      },
+      {
+        name: "Regeneron",
+        hq: "Tarrytown, NY",
+        localPresence: "R&D presence in Cambridge, MA",
+        color: "#003B71",
+        archetype: "Body composition + maintenance",
+        leadHook: "Muscle-sparing weight loss + rebound prevention for post-GLP-1 maintenance",
+        valueProposition: "Regeneron entered obesity via $1.8B Hansoh deal (GLP-1/GIP) and trevogrumab (anti-GDF8 for lean mass). [Lead Compound]\u2019s clinical profile \u2014 fat mass reduction with preserved skeletal muscle, plus [X]% [key result] \u2014 directly complements both programs as an oral maintenance therapy.",
+        contacts: [
+          { name: "BD/Partnering", title: "Metabolic disease S&E", access: "regeneron.com/partnering; BIO Partnering" },
+        ],
+        warmPath: "BIO Partnering + scientific conference networking",
+        recentDeals: "$1.8B Hansoh, trevogrumab (anti-myostatin)",
+        urgency: "Late entrant building fast. Needs oral, non-incretin differentiation. Muscle-sparing data highly relevant.",
+        emailSubject: null,
+        emailBody: null,
+      },
+      {
+        name: "Takeda",
+        hq: "Tokyo, Japan",
+        localPresence: "Global R&D hub, Cambridge, MA \u2014 largest MA life sciences employer",
+        color: "#E60012",
+        archetype: "GI/metabolic adjacency",
+        leadHook: "GI/gut hormone expertise \u2014 natural scientific overlap with [novel pathway]",
+        valueProposition: "Takeda\u2019s GI franchise is one of the strongest in pharma. [Lead Compound]\u2019s mechanism \u2014 activating target tissue novel targets to trigger gut hormone release via the [novel pathway] \u2014 sits at the intersection of GI biology and metabolic disease. Takeda paid $4B for Nimbus\u2019 TYK2, showing willingness to acquire novel mechanisms.",
+        contacts: [
+          { name: "BD/Partnering", title: "GI & metabolic partnering", access: "takeda.com/partnering; BIO Partnering" },
+        ],
+        warmPath: "BIO Partnering; Cambridge local networking",
+        recentDeals: "$4B Nimbus TYK2 acquisition, strong GI franchise",
+        urgency: "Expanding beyond traditional GI into metabolic adjacencies. Cambridge hub enables easy meeting.",
+        emailSubject: null,
+        emailBody: null,
+      },
+      {
+        name: "Kailera Therapeutics",
+        hq: "Waltham, MA",
+        localPresence: "HQ in Waltham, MA",
+        color: "#1D9E75",
+        archetype: "Obesity-first biotech \u2014 portfolio gap",
+        leadHook: "Non-incretin add-on to complete an all-GLP-1 portfolio",
+        valueProposition: "Kailera is the largest obesity-only startup ($1B+ raised) but their entire pipeline is GLP-1-based. They have no non-incretin mechanism. As they approach Phase 3, [Lead Compound] offers a complementary oral maintenance therapy that extends their franchise by addressing rebound. CBO Paul Burgess (ex-Cerevel BD) would understand portfolio logic immediately.",
+        contacts: [
+          { name: "Paul Burgess", title: "COO & Chief Business Officer", access: "Direct outreach; BIO Partnering" },
+          { name: "Ron Renaud", title: "President & CEO", access: "Conference panels; investor events" },
+        ],
+        warmPath: "BIO Partnering (Boston, June 2026); Atlas/Bain network",
+        recentDeals: "$400M Series A, $600M Series B, Hengrui licensing",
+        urgency: "Approaching Phase 3 \u2014 thinking lifecycle management. All-GLP-1 pipeline = clear gap for non-incretin.",
+        emailSubject: null,
+        emailBody: null,
+      },
+      {
+        name: "Rhythm Pharmaceuticals",
+        hq: "222 Berkeley St, Boston, MA",
+        localPresence: "HQ in Boston",
+        color: "#E87722",
+        archetype: "KOL network + regulatory expertise",
+        leadHook: "Shared KOL network in obesity biology \u2014 different segment, same playbook",
+        valueProposition: "Rhythm is the only pure-play obesity therapeutics company with FDA-approved products (IMCIVREE). They have deep obesity drug regulatory expertise, KOL relationships, and commercial infrastructure. [Lead Compound] targets general obesity (different population) but shares the same scientific community. Potential for scientific collaboration or BD introductions.",
+        contacts: [
+          { name: "David Meeker, MD", title: "Chairman, President & CEO", access: "Boston-based; investor conferences" },
+        ],
+        warmPath: "Scientific conference overlap; Boston local networking",
+        recentDeals: "IMCIVREE commercialization, TRANSCEND Phase 3",
+        urgency: "Looking to expand beyond ultra-rare. Fat taste receptor mechanism could interest their scientific team.",
+        emailSubject: null,
+        emailBody: null,
+      },
+      {
+        name: "NodThera",
+        hq: "Boston, MA (+ Cambridge, UK)",
+        localPresence: "HQ in Boston",
+        color: "#BA7517",
+        archetype: "Anti-inflammatory pipeline synergy",
+        leadHook: "NLRP3 in obese patients meets [Client]\u2019s inflammation R&D",
+        valueProposition: "NodThera develops oral NLRP3 inflammasome inhibitors for cardiometabolic diseases, with positive Phase 1b data in inflamed obese subjects. [Client] has an anti-inflammatory pipeline ([Lead Compound] for inflammation, in-vivo in progress). Direct overlap: both target oral therapeutics for obesity-related inflammation. Sanofi Ventures-backed \u2014 connects to [Client]\u2019s Sanofi network.",
+        contacts: [
+          { name: "Geoff McDonough, MD", title: "CEO", access: "Piper Sandler Biopharma Symposium (Apr 15, Boston)" },
+        ],
+        warmPath: "Piper Sandler Boston event (IMMEDIATE); Sanofi Ventures via [Investor]",
+        recentDeals: "Phase 1b positive in inflamed obese, multiple Q1 2026 investor presentations",
+        urgency: "IMMEDIATE: Presenting in Boston April 15. Sanofi Ventures-backed \u2014 connects to existing network.",
+        emailSubject: null,
+        emailBody: null,
+      },
+      {
+        name: "Wave Life Sciences",
+        hq: "733 Concord Ave, Cambridge, MA",
+        localPresence: "HQ in Cambridge",
+        color: "#00A8E0",
+        archetype: "Complementary modality",
+        leadHook: "Different modality, same target \u2014 RNA-based obesity via INHBE silencing",
+        valueProposition: "Wave\u2019s WVE-007 (GalNAc-siRNA targeting INHBE for obesity) represents an RNA approach. [Lead Compound] is oral small molecule. Complementary modalities targeting the same disease. Potential for scientific collaboration or combination exploration.",
+        contacts: [
+          { name: "Christopher Wright, MD", title: "Chief Medical Officer", access: "Scientific conferences; Cambridge local" },
+        ],
+        warmPath: "Scientific conference networking; Cambridge proximity",
+        recentDeals: "WVE-007 advancing toward weight-loss milestones",
+        urgency: "Complementary modality. Cambridge HQ = easy meeting.",
+        emailSubject: null,
+        emailBody: null,
+      },
+      {
+        name: "Ironwood Pharmaceuticals",
+        hq: "100 Summer St, Boston, MA",
+        localPresence: "HQ in Boston",
+        color: "#4A7B3E",
+        archetype: "GI expertise + oral commercialization",
+        leadHook: "Gut hormone biology expertise + oral GI drug commercialization experience",
+        valueProposition: "Ironwood has deep expertise in gut hormone biology (Linzess, apraglutide/GLP-2) and successfully commercializes oral drugs acting on the GI tract. [Lead Compound]\u2019s [novel pathway] mechanism is scientifically adjacent. They understand the regulatory pathway and have commercial infrastructure.",
+        contacts: [
+          { name: "BD/Corporate Development", title: "Partnering team", access: "ironwoodpharma.com; BIO Partnering" },
+        ],
+        warmPath: "Boston local; scientific conference overlap",
+        recentDeals: "Apraglutide rolling NDA, Linzess ~$351M/yr",
+        urgency: "Looking to diversify beyond IBS. Gut hormone expertise directly relevant.",
+        emailSubject: null,
+        emailBody: null,
+      },
+      {
+        name: "Alnylam Pharmaceuticals",
+        hq: "675 W Kendall St, Cambridge, MA",
+        localPresence: "HQ in Cambridge (Kendall Square)",
+        color: "#FF6600",
+        archetype: "Network connector",
+        leadHook: "Oral small molecule complement to RNA therapeutics platform",
+        valueProposition: "Alnylam\u2019s cardiometabolic pipeline is injection-based RNAi. [Lead Compound] offers a complementary oral modality. More strategically, Alnylam\u2019s extensive partnership network (Novartis, Sanofi, Roche) and BD deal infrastructure could provide valuable introductions.",
+        contacts: [
+          { name: "BD/Partnering", title: "Corporate development", access: "alnylam.com; Kendall Square" },
+        ],
+        warmPath: "Cambridge proximity; Sanofi/Roche network overlap",
+        recentDeals: "Novartis (Leqvio), cardiometabolic pipeline expansion",
+        urgency: "Lower priority as direct partner but high value as network connector.",
+        emailSubject: null,
+        emailBody: null,
+      },
+      {
+        name: "Vivtex (MIT spinout)",
+        hq: "Cambridge, MA",
+        localPresence: "Cambridge, MA",
+        color: "#7F77DD",
+        archetype: "Formulation technology partner",
+        leadHook: "Oral formulation optimization for [Lead Compound] oral formulation",
+        valueProposition: "Vivtex\u2019s GI-tract-on-a-chip platform could optimize [Client]\u2019s oral formulation formulation. Technical collaboration, not licensing \u2014 but Vivtex\u2019s Novo Nordisk and Astellas relationships could provide BD introductions.",
+        contacts: [
+          { name: "Thomas von Erlach, PhD", title: "CEO & Co-founder", access: "Cambridge local; scientific conferences" },
+        ],
+        warmPath: "MIT/Cambridge scientific network; BIO Partnering",
+        recentDeals: "$2.1B Novo deal, Astellas, Orbis, Equillium, AI Proteins",
+        urgency: "Novo relationship could facilitate intro. Technical collaboration opportunity.",
+        emailSubject: null,
+        emailBody: null,
+      },
+      {
+        name: "MassBio / BIO New England",
+        hq: "Cambridge, MA",
+        localPresence: "Cambridge, MA",
+        color: "#5F5E5A",
+        archetype: "Ecosystem connector",
+        leadHook: "1,700+ member trade association \u2014 force multiplier for all Boston outreach",
+        valueProposition: "Not a partner but a force multiplier. MassBio membership gives access to local networking events, partnering facilitation, and visibility as a French biotech entering the US market.",
+        contacts: [
+          { name: "Membership Team", title: "International member program", access: "massbio.org" },
+        ],
+        warmPath: "Direct application; [Seed Investor] network may have connections",
+        recentDeals: "Annual meeting, partnering nights, investor events year-round",
+        urgency: "Activate before BIO International (June 2026) for maximum leverage.",
+        emailSubject: null,
+        emailBody: null,
+      },
+    ],
+  },
+];
+
+const emailArchetypes = [
+  {
+    id: "A",
+    name: "Franchise protector",
+    targets: "Novo Nordisk",
+    subject: "Oral novel target agonist \u2014 50% weight rebound reduction post-semaglutide (preclinical)",
+    opening: "Their problem: weight rebound threatens GLP-1 franchise value.",
+    keyData: "[X]% [key result], maintenance therapy positioning",
+  },
+  {
+    id: "B",
+    name: "Pipeline builder / precision medicine",
+    targets: "Eli Lilly",
+    subject: "First-in-class oral novel target agonist \u2014 incretin add-on with lean mass preservation",
+    opening: "Their published BD priorities: incretin add-on + body composition.",
+    keyData: "Precision medicine angle, biomarker-driven patient selection",
+  },
+  {
+    id: "C",
+    name: "Weight maintenance seeker",
+    targets: "Roche",
+    subject: "Oral weight maintenance therapy \u2014 novel novel target agonist, Phase 1 complete",
+    opening: "Their head of obesity publicly asked for a weight maintenance drug.",
+    keyData: "PYY gap-fill after CT-173 drop, CT-388/petrelintide combo potential",
+  },
+  {
+    id: "D",
+    name: "Late entrant / differentiation seeker",
+    targets: "AstraZeneca, Pfizer",
+    subject: "Only clinical-stage novel target agonist \u2014 differentiated oral mechanism for obesity",
+    opening: "160+ drugs in development, most incretin. Differentiation is the challenge.",
+    keyData: "White-space: zero competition in novel target space",
+  },
+];
+
+const conferences = [
+  { event: "Piper Sandler Biopharma Symposium", date: "April 15, 2026", location: "Boston, MA", priority: "IMMEDIATE", note: "NodThera presenting today. In-person opportunity.", color: "#E24B4A" },
+  { event: "BIO International Convention", date: "June 2026", location: "Boston, MA", priority: "CRITICAL", note: "Highest-volume partnering. Book 15-20 meetings. All Tier 1 + 2 accessible.", color: "#E24B4A" },
+  { event: "Novo Nordisk Pharma Partnering Day", date: "2026 (TBD)", location: "TBD (w/ MassBio)", priority: "HIGH", note: "Novo-specific. Email partnering@novonordisk.com for invite.", color: "#BA7517" },
+  { event: "ObesityWeek", date: "Nov 14\u201317, 2026", location: "Washington, DC", priority: "HIGH", note: "Disease-specific. Novo confirmed. Present poster or data.", color: "#BA7517" },
+  { event: "BIO-Europe", date: "Autumn 2026", location: "Cologne, Germany", priority: "HIGH", note: "European BD focus. Proximity to [Client] (Dijon). BI/Roche/AZ accessible.", color: "#BA7517" },
+  { event: "EASO Congress", date: "2026 (TBD)", location: "Europe", priority: "MEDIUM", note: "European obesity scientific meeting. KOL networking.", color: "#1D9E75" },
+  { event: "JP Morgan Healthcare", date: "Jan 2027", location: "San Francisco", priority: "MEDIUM", note: "Requires investor intro for meeting slot. Highest-status event.", color: "#1D9E75" },
+];
+
+const timeline = [
+  { phase: "Phase 1: Relationship building", period: "Now \u2013 Q3 2026", actions: "Submit through formal BD portals (Lilly, Pfizer, Roche, AZ). Activate warm intros ([Advisor] \u2192 BI/Pfizer, [CMO] \u2192 Novo, [Investor] \u2192 Sanofi). Book BIO International meetings. Join MassBio. Plan Boston trip.", goal: "Get on 4-5 company radars" },
+  { phase: "Phase 2: Data-driven push", period: "Q4 2026 \u2013 Q1 2027", actions: "MAD study completes Dec 2026 with full [N]-patient dataset. This is the trigger for serious BD conversations. Schedule follow-up meetings with all Phase 1 contacts. Present full dataset under CDA at ObesityWeek and BIO-Europe.", goal: "Receive 2-3 CDA requests and data room access" },
+  { phase: "Phase 3: Deal negotiations", period: "S1 2027+", actions: "Phase 2a recruitment starting. Full Phase 1 data package available. Negotiate with interested parties. Consider BD advisory firm (Scius, Alacrita, Trinity) for deal structuring.", goal: "Term sheet by end of 2027" },
+];
+
+const dosAndDonts = {
+  always: [
+    { rule: "Lead with THEIR problem", detail: "Rebound (Novo/Roche), differentiation (Pfizer/AZ), body composition (Lilly), portfolio gap (Kailera)" },
+    { rule: "Include specific numbers", detail: "[X]% [key result], [X]% responder rate, \u22124.3% fat mass, [N]+ subjects, zero SAEs, patents to [year]" },
+    { rule: "Position as complementary", detail: "\u201CWe make your GLP-1 franchise more valuable\u201D \u2014 never \u201CWe\u2019re better than your GLP-1\u201D" },
+    { rule: "Keep emails under 200 words", detail: "BD teams read 50 pitches/week. Get to the point. Data speaks louder than adjectives." },
+    { rule: "Customize the opening line", detail: "Reference their specific deal, public statement, or published BD priority. Show you\u2019ve done homework." },
+    { rule: "End with a specific ask", detail: "\u201C30 minutes to share the full dataset\u201D \u2014 not \u201CI\u2019d love to connect\u201D or \u201CLet me know your thoughts\u201D" },
+  ],
+  never: [
+    { rule: "Never say \u2018blockbuster potential\u2019", detail: "Or \u2018paradigm shift,\u2019 \u2018revolutionary,\u2019 \u2018game-changing.\u2019 Hype language = email deleted." },
+    { rule: "Never position as a GLP-1 competitor", detail: "[Client] wins as a complement, not a replacement. The obesity market is big enough for both." },
+    { rule: "Never send the full 30-slide deck unsolicited", detail: "First email = 200-word teaser. Deck comes after they express interest and sign CDA." },
+    { rule: "Never lead with the science", detail: "[Target Receptors] receptors mean nothing to a BD scout. Lead with clinical data and commercial positioning." },
+    { rule: "Never email the CEO first", detail: "Start with S&E / Director-level BD. CEOs delegate; directors evaluate. Work bottom-up." },
+    { rule: "Never mention the fundraise in the first email", detail: "This is a partnering conversation, not a pitch for money. Fundraise context comes later if relevant." },
+  ],
+};
+
+function Section({ title, children, defaultOpen = false }) {
+  const [open, setOpen] = useState(defaultOpen);
+  return (
+    <div style={{ marginBottom: 12, border: "0.5px solid var(--color-border-tertiary)", borderRadius: "var(--border-radius-lg)", overflow: "hidden" }}>
+      <div onClick={() => setOpen(!open)} style={{ padding: "12px 16px", cursor: "pointer", display: "flex", justifyContent: "space-between", alignItems: "center", background: "var(--color-background-secondary)" }}>
+        <span style={{ fontWeight: 500, fontSize: 15, color: "var(--color-text-primary)" }}>{title}</span>
+        <span style={{ fontSize: 18, color: "var(--color-text-tertiary)", transform: open ? "rotate(180deg)" : "rotate(0deg)", transition: "transform 0.2s" }}>{"\u25BE"}</span>
+      </div>
+      {open && <div style={{ padding: "16px" }}>{children}</div>}
+    </div>
+  );
+}
+
+function CompanyCard({ company, isExpanded, onToggle }) {
+  return (
+    <div style={{ background: "var(--color-background-primary)", border: "0.5px solid var(--color-border-tertiary)", borderLeft: `3px solid ${company.color}`, borderRadius: "0 var(--border-radius-lg) var(--border-radius-lg) 0", marginBottom: 8, overflow: "hidden" }}>
+      <div onClick={onToggle} style={{ padding: "12px 16px", cursor: "pointer", display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: 10 }}>
+        <div style={{ flex: 1, minWidth: 0 }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 8, flexWrap: "wrap" }}>
+            <span style={{ fontWeight: 500, fontSize: 14, color: "var(--color-text-primary)" }}>{company.name}</span>
+            <span style={{ fontSize: 11, color: `${company.color}`, background: `${company.color}14`, padding: "1px 7px", borderRadius: 5, fontWeight: 500 }}>{company.archetype}</span>
+          </div>
+          <div style={{ marginTop: 4, fontSize: 12, color: "var(--color-text-secondary)", lineHeight: 1.5 }}>{company.leadHook}</div>
+        </div>
+        <span style={{ fontSize: 16, color: "var(--color-text-tertiary)", transform: isExpanded ? "rotate(180deg)" : "rotate(0deg)", transition: "transform 0.2s", flexShrink: 0, marginTop: 2 }}>{"\u25BE"}</span>
+      </div>
+      {isExpanded && (
+        <div style={{ padding: "0 16px 16px", borderTop: "0.5px solid var(--color-border-tertiary)" }}>
+          <div style={{ marginTop: 12 }}>
+            <div style={{ fontSize: 11, fontWeight: 500, color: "var(--color-text-secondary)", textTransform: "uppercase", letterSpacing: "0.05em", marginBottom: 5 }}>Value proposition</div>
+            <div style={{ fontSize: 12.5, color: "var(--color-text-primary)", lineHeight: 1.65, background: "var(--color-background-secondary)", padding: "10px 12px", borderRadius: 8 }}>{company.valueProposition}</div>
+          </div>
+          <div style={{ display: "grid", gridTemplateColumns: "minmax(0,1fr) minmax(0,1fr)", gap: 14, marginTop: 14 }}>
+            <div>
+              <div style={{ fontSize: 11, fontWeight: 500, color: "var(--color-text-secondary)", textTransform: "uppercase", letterSpacing: "0.05em", marginBottom: 6 }}>Key contacts</div>
+              {company.contacts.map((c, i) => (
+                <div key={i} style={{ marginBottom: 6, fontSize: 12, lineHeight: 1.4 }}>
+                  <div style={{ fontWeight: 500, color: "var(--color-text-primary)" }}>{c.name}</div>
+                  <div style={{ color: "var(--color-text-secondary)" }}>{c.title}</div>
+                  <div style={{ color: "var(--color-text-tertiary)", fontSize: 11 }}>{c.access}</div>
+                </div>
+              ))}
+            </div>
+            <div>
+              <div style={{ fontSize: 11, fontWeight: 500, color: "var(--color-text-secondary)", textTransform: "uppercase", letterSpacing: "0.05em", marginBottom: 6 }}>Warm path</div>
+              <div style={{ fontSize: 12, color: "var(--color-text-primary)", lineHeight: 1.5, marginBottom: 10 }}>{company.warmPath}</div>
+              <div style={{ fontSize: 11, fontWeight: 500, color: "var(--color-text-secondary)", textTransform: "uppercase", letterSpacing: "0.05em", marginBottom: 6 }}>Recent deals</div>
+              <div style={{ fontSize: 12, color: "var(--color-text-secondary)", lineHeight: 1.5, marginBottom: 10 }}>{company.recentDeals}</div>
+              {company.urgency && (<><div style={{ fontSize: 11, fontWeight: 500, color: "var(--color-text-secondary)", textTransform: "uppercase", letterSpacing: "0.05em", marginBottom: 6 }}>Why now</div><div style={{ fontSize: 12, color: "var(--color-text-primary)", lineHeight: 1.5, fontStyle: "italic" }}>{company.urgency}</div></>)}
+            </div>
+          </div>
+          {company.emailBody && (
+            <div style={{ marginTop: 14 }}>
+              <div style={{ fontSize: 11, fontWeight: 500, color: "var(--color-text-secondary)", textTransform: "uppercase", letterSpacing: "0.05em", marginBottom: 6 }}>Email template</div>
+              <div style={{ background: "var(--color-background-secondary)", border: "0.5px solid var(--color-border-tertiary)", borderLeft: `3px solid ${TEAL}`, borderRadius: "0 8px 8px 0", padding: "10px 14px" }}>
+                <div style={{ fontSize: 12, marginBottom: 6 }}><span style={{ fontWeight: 500, color: TEAL }}>Subject: </span><span style={{ color: "var(--color-text-primary)" }}>{company.emailSubject}</span></div>
+                <pre style={{ fontSize: 11.5, color: "var(--color-text-primary)", lineHeight: 1.6, whiteSpace: "pre-wrap", fontFamily: "var(--font-sans)", margin: 0 }}>{company.emailBody}</pre>
+              </div>
+            </div>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function App() {
+  const [expanded, setExpanded] = useState({});
+  const [tab, setTab] = useState("contacts");
+  const [filter, setFilter] = useState("all");
+  const toggle = (key) => setExpanded(p => ({ ...p, [key]: !p[key] }));
+  const expandAll = (tier) => { const n = { ...expanded }; tiers.find(t => t.tier === tier).companies.forEach((_, i) => { n[`${tier}-${i}`] = true; }); setExpanded(n); };
+  const collapseAll = (tier) => { const n = { ...expanded }; tiers.find(t => t.tier === tier).companies.forEach((_, i) => { n[`${tier}-${i}`] = false; }); setExpanded(n); };
+
+  const tabs = [
+    { id: "contacts", label: "Contacts & value props" },
+    { id: "emails", label: "Email templates" },
+    { id: "messaging", label: "Messaging do\u2019s & don\u2019ts" },
+    { id: "timing", label: "Sequencing & timing" },
+    { id: "conferences", label: "Conference calendar" },
+    { id: "investors", label: "Boston investors" },
+    { id: "familyoffices", label: "Family offices" },
+  ];
+
+  return (
+    <div style={{ padding: "0.5rem 0", fontFamily: "var(--font-sans)", maxWidth: 800 }}>
+      <div style={{ marginBottom: 20 }}>
+        <div style={{ fontSize: 12, color: "var(--color-text-tertiary)" }}>[Client] [Entity] \u2014 Confidential</div>
+        <h1 style={{ fontSize: 22, fontWeight: 500, color: "var(--color-text-primary)", margin: "2px 0 4px" }}>BD contact bible</h1>
+        <div style={{ fontSize: 13, color: "var(--color-text-secondary)" }}>Complete outreach playbook: contacts, value propositions, email templates, messaging, timing, and conferences.</div>
+      </div>
+
+      <div style={{ display: "flex", gap: 4, marginBottom: 16, flexWrap: "wrap", borderBottom: "0.5px solid var(--color-border-tertiary)", paddingBottom: 8 }}>
+        {tabs.map(t => (
+          <button key={t.id} onClick={() => setTab(t.id)} style={{ padding: "6px 12px", fontSize: 12, borderRadius: 6, border: tab === t.id ? `1.5px solid ${TEAL}` : "0.5px solid transparent", background: tab === t.id ? `${TEAL}10` : "transparent", color: tab === t.id ? TEAL : "var(--color-text-secondary)", cursor: "pointer", fontWeight: tab === t.id ? 500 : 400 }}>{t.label}</button>
+        ))}
+      </div>
+
+      {tab === "contacts" && (
+        <>
+          <div style={{ display: "flex", gap: 4, marginBottom: 14, flexWrap: "wrap" }}>
+            {[{ key: "all", label: "All" }, { key: "warm", label: "Warm intro available" }, { key: "boston", label: "Boston-area" }].map(f => (
+              <button key={f.key} onClick={() => setFilter(f.key)} style={{ padding: "4px 10px", fontSize: 11, borderRadius: 5, border: filter === f.key ? `1px solid ${GOLD}` : "0.5px solid var(--color-border-secondary)", background: filter === f.key ? `${GOLD}14` : "transparent", color: filter === f.key ? GOLD : "var(--color-text-tertiary)", cursor: "pointer" }}>{f.label}</button>
+            ))}
+          </div>
+          {tiers.map(tier => {
+            let cos = tier.companies;
+            if (filter === "warm") cos = cos.filter(c => c.warmPath && (c.warmPath.includes("DIRECT") || c.warmPath.includes("HIGHEST") || c.warmPath.includes("IMMEDIATE") || c.warmPath.includes("[Investor]") || c.warmPath.includes("[Advisor]") || c.warmPath.includes("[CMO]")));
+            if (filter === "boston") cos = cos.filter(c => ((c.localPresence || "") + (c.hq || "")).toLowerCase().match(/boston|cambridge|waltham|ma\b/));
+            if (!cos.length) return null;
+            return (
+              <div key={tier.tier} style={{ marginBottom: 24 }}>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", borderBottom: `2px solid ${tier.tier === 1 ? TEAL : GOLD}`, paddingBottom: 4, marginBottom: 6 }}>
+                  <div>
+                    <div style={{ fontSize: 14, fontWeight: 500, color: "var(--color-text-primary)" }}>{tier.label}</div>
+                    <div style={{ fontSize: 11, color: "var(--color-text-secondary)", marginTop: 1 }}>{tier.desc}</div>
+                  </div>
+                  <div style={{ display: "flex", gap: 6, flexShrink: 0 }}>
+                    <button onClick={() => expandAll(tier.tier)} style={{ fontSize: 11, color: "var(--color-text-tertiary)", background: "none", border: "none", cursor: "pointer", textDecoration: "underline" }}>expand all</button>
+                    <button onClick={() => collapseAll(tier.tier)} style={{ fontSize: 11, color: "var(--color-text-tertiary)", background: "none", border: "none", cursor: "pointer", textDecoration: "underline" }}>collapse all</button>
+                  </div>
+                </div>
+                {cos.map(company => {
+                  const oi = tier.companies.indexOf(company);
+                  const key = `${tier.tier}-${oi}`;
+                  return <CompanyCard key={key} company={company} isExpanded={!!expanded[key]} onToggle={() => toggle(key)} />;
+                })}
+              </div>
+            );
+          })}
+        </>
+      )}
+
+      {tab === "emails" && (
+        <div>
+          <div style={{ fontSize: 13, color: "var(--color-text-secondary)", marginBottom: 16, lineHeight: 1.6 }}>
+            Four email archetypes, each tailored to a different strategic motivation. Customize with specific names and send from [CEO Name]. For companies with warm intros (Boehringer, Pfizer, Sanofi), the email should be co-signed or preceded by the advisor\u2019s personal introduction.
+          </div>
+          {emailArchetypes.map(a => (
+            <Section key={a.id} title={`Archetype ${a.id}: ${a.name} \u2014 ${a.targets}`}>
+              <div style={{ marginBottom: 10 }}>
+                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, marginBottom: 12 }}>
+                  <div style={{ background: "var(--color-background-secondary)", padding: "8px 10px", borderRadius: 6, fontSize: 12 }}>
+                    <div style={{ fontWeight: 500, color: "var(--color-text-primary)", marginBottom: 2 }}>Opening angle</div>
+                    <div style={{ color: "var(--color-text-secondary)" }}>{a.opening}</div>
+                  </div>
+                  <div style={{ background: "var(--color-background-secondary)", padding: "8px 10px", borderRadius: 6, fontSize: 12 }}>
+                    <div style={{ fontWeight: 500, color: "var(--color-text-primary)", marginBottom: 2 }}>Key data emphasis</div>
+                    <div style={{ color: "var(--color-text-secondary)" }}>{a.keyData}</div>
+                  </div>
+                </div>
+                {tiers[0].companies.filter(c => a.targets.includes(c.name) && c.emailBody && !c.emailBody.startsWith("[")).map(c => (
+                  <div key={c.name} style={{ background: "var(--color-background-secondary)", border: "0.5px solid var(--color-border-tertiary)", borderLeft: `3px solid ${TEAL}`, borderRadius: "0 8px 8px 0", padding: "12px 14px", marginBottom: 8 }}>
+                    <div style={{ fontSize: 12, marginBottom: 8 }}><span style={{ fontWeight: 500, color: TEAL }}>Subject: </span><span style={{ color: "var(--color-text-primary)" }}>{c.emailSubject}</span></div>
+                    <pre style={{ fontSize: 11.5, color: "var(--color-text-primary)", lineHeight: 1.6, whiteSpace: "pre-wrap", fontFamily: "var(--font-sans)", margin: 0 }}>{c.emailBody}</pre>
+                  </div>
+                ))}
+                {tiers[0].companies.filter(c => a.targets.includes(c.name) && c.emailBody && c.emailBody.startsWith("[")).map(c => (
+                  <div key={c.name} style={{ fontSize: 12, color: "var(--color-text-secondary)", fontStyle: "italic", padding: "8px 12px", background: "var(--color-background-secondary)", borderRadius: 6 }}>{c.emailBody}</div>
+                ))}
+              </div>
+            </Section>
+          ))}
+          <div style={{ padding: "12px 14px", background: "var(--color-background-secondary)", borderRadius: 8, fontSize: 12, color: "var(--color-text-secondary)", lineHeight: 1.6, marginTop: 12 }}>
+            <strong style={{ color: "var(--color-text-primary)" }}>Structure for all emails:</strong> (1) Their problem in first sentence. (2) [Client]\u2019s headline result in second sentence. (3) Mechanism in one sentence. (4) Clinical status as bullet points. (5) Specific ask: \u201C30 minutes to share the full dataset.\u201D Total: under 200 words.
+          </div>
+        </div>
+      )}
+
+      {tab === "messaging" && (
+        <div>
+          <div style={{ marginBottom: 20 }}>
+            <div style={{ fontSize: 14, fontWeight: 500, color: "var(--color-text-primary)", marginBottom: 10, display: "flex", alignItems: "center", gap: 6 }}>
+              <span style={{ display: "inline-block", width: 8, height: 8, borderRadius: "50%", background: "#1D9E75" }}></span>
+              Always do
+            </div>
+            {dosAndDonts.always.map((item, i) => (
+              <div key={i} style={{ display: "grid", gridTemplateColumns: "200px minmax(0,1fr)", gap: 10, marginBottom: 8, fontSize: 12, paddingBottom: 8, borderBottom: "0.5px solid var(--color-border-tertiary)" }}>
+                <div style={{ fontWeight: 500, color: "var(--color-text-primary)" }}>{item.rule}</div>
+                <div style={{ color: "var(--color-text-secondary)", lineHeight: 1.5 }}>{item.detail}</div>
+              </div>
+            ))}
+          </div>
+          <div>
+            <div style={{ fontSize: 14, fontWeight: 500, color: "var(--color-text-primary)", marginBottom: 10, display: "flex", alignItems: "center", gap: 6 }}>
+              <span style={{ display: "inline-block", width: 8, height: 8, borderRadius: "50%", background: "#E24B4A" }}></span>
+              Never do
+            </div>
+            {dosAndDonts.never.map((item, i) => (
+              <div key={i} style={{ display: "grid", gridTemplateColumns: "200px minmax(0,1fr)", gap: 10, marginBottom: 8, fontSize: 12, paddingBottom: 8, borderBottom: "0.5px solid var(--color-border-tertiary)" }}>
+                <div style={{ fontWeight: 500, color: "var(--color-text-primary)" }}>{item.rule}</div>
+                <div style={{ color: "var(--color-text-secondary)", lineHeight: 1.5 }}>{item.detail}</div>
+              </div>
+            ))}
+          </div>
+          <div style={{ padding: "14px 16px", background: "var(--color-background-secondary)", borderRadius: 10, fontSize: 12, color: "var(--color-text-secondary)", lineHeight: 1.6, marginTop: 16 }}>
+            <strong style={{ color: "var(--color-text-primary)" }}>Core message (memorize this):</strong> [Client] offers the only oral, non-incretin novel target agonist in clinical development \u2014 a first-in-class mechanism that naturally induces GLP-1, CCK, and PYY release, preserves lean muscle mass, and reduces weight rebound by 50% post-semaglutide. We make your GLP-1 franchise more valuable. We don\u2019t compete with it.
+          </div>
+        </div>
+      )}
+
+      {tab === "timing" && (
+        <div>
+          <div style={{ fontSize: 13, color: "var(--color-text-secondary)", marginBottom: 16, lineHeight: 1.6 }}>
+            [Client]\u2019s BD outreach should be phased around two key data milestones: the MAD study completion (Dec 2026, [N] patients) and Phase 2a recruitment start (S1 2027). The goal of current outreach is relationship-building, not deal-closing.
+          </div>
+          {timeline.map((t, i) => (
+            <div key={i} style={{ display: "grid", gridTemplateColumns: "180px minmax(0,1fr)", gap: 14, marginBottom: 16, paddingBottom: 16, borderBottom: i < timeline.length - 1 ? "0.5px solid var(--color-border-tertiary)" : "none" }}>
+              <div>
+                <div style={{ fontWeight: 500, fontSize: 13, color: "var(--color-text-primary)" }}>{t.phase}</div>
+                <div style={{ fontSize: 12, color: TEAL, fontWeight: 500, marginTop: 2 }}>{t.period}</div>
+                <div style={{ fontSize: 11, color: "var(--color-text-tertiary)", marginTop: 6, background: "var(--color-background-secondary)", padding: "4px 8px", borderRadius: 5, display: "inline-block" }}>Goal: {t.goal}</div>
+              </div>
+              <div style={{ fontSize: 12, color: "var(--color-text-secondary)", lineHeight: 1.65 }}>{t.actions}</div>
+            </div>
+          ))}
+          <div style={{ marginTop: 12 }}>
+            <div style={{ fontSize: 14, fontWeight: 500, color: "var(--color-text-primary)", marginBottom: 10 }}>Warm introduction activation map</div>
+            {[
+              { person: "[CMO Name] (CMO)", bg: "Ex-Novo Nordisk, GSK, Pfizer, Novartis", targets: "Novo Nordisk (highest priority), GSK, Pfizer, Novartis", action: "Personal intro to clinical dev / medical affairs contacts" },
+              { person: "[Advisor Name] (Advisor)", bg: "Ex-Boehringer Ingelheim, Pfizer", targets: "Boehringer (highest priority), Pfizer", action: "Direct BD relationships at both companies" },
+              { person: "[Investor Name] (Investor)", bg: "Ex-Sanofi", targets: "Sanofi (Cambridge HQ)", action: "Sanofi Ventures + BD team intro" },
+              { person: "[Board Member] ([Seed Investor])", bg: "Board of bioM\u00E9rieux", targets: "French pharma/biotech network", action: "European BD leader introductions" },
+            ].map((w, i) => (
+              <div key={i} style={{ display: "grid", gridTemplateColumns: "170px minmax(0,1fr) minmax(0,1fr)", gap: 10, marginBottom: 8, fontSize: 12, padding: "8px 10px", background: "var(--color-background-secondary)", borderRadius: 8 }}>
+                <div><div style={{ fontWeight: 500, color: "var(--color-text-primary)" }}>{w.person}</div><div style={{ color: "var(--color-text-tertiary)", fontSize: 11 }}>{w.bg}</div></div>
+                <div><div style={{ fontWeight: 500, color: "var(--color-text-secondary)", fontSize: 11, marginBottom: 2 }}>TARGETS</div><div style={{ color: "var(--color-text-primary)" }}>{w.targets}</div></div>
+                <div><div style={{ fontWeight: 500, color: "var(--color-text-secondary)", fontSize: 11, marginBottom: 2 }}>ACTION</div><div style={{ color: "var(--color-text-primary)" }}>{w.action}</div></div>
+              </div>
+            ))}
+          </div>
+          <div style={{ padding: "14px 16px", background: "var(--color-background-secondary)", borderRadius: 10, fontSize: 12, color: "var(--color-text-secondary)", lineHeight: 1.6, marginTop: 16 }}>
+            <strong style={{ color: "var(--color-text-primary)" }}>Materials needed before outreach:</strong> (1) Two-page non-confidential executive summary. (2) Full data package (under CDA): preclinical + clinical datasets, [CRO Name] rebound study, MAD results, CMC status, Phase 2 protocol. (3) 15-minute condensed pitch deck (problem, mechanism, data, IP, ask). (4) Standard CDA template ready for immediate dispatch.
+          </div>
+        </div>
+      )}
+
+      {tab === "conferences" && (
+        <div>
+          <div style={{ fontSize: 13, color: "var(--color-text-secondary)", marginBottom: 16, lineHeight: 1.6 }}>
+            The obesity and metabolic disease conference circuit is where 90% of early-stage biotech deals start. [Client] should target 3-4 events in 2026, with BIO International (Boston, June) as the anchor.
+          </div>
+          {conferences.map((c, i) => (
+            <div key={i} style={{ display: "grid", gridTemplateColumns: "minmax(0,1fr) 120px 130px", gap: 10, marginBottom: 8, padding: "10px 14px", background: "var(--color-background-primary)", border: "0.5px solid var(--color-border-tertiary)", borderLeft: `3px solid ${c.color}`, borderRadius: "0 8px 8px 0" }}>
+              <div>
+                <div style={{ fontWeight: 500, fontSize: 13, color: "var(--color-text-primary)" }}>{c.event}</div>
+                <div style={{ fontSize: 11, color: "var(--color-text-secondary)", marginTop: 3, lineHeight: 1.5 }}>{c.note}</div>
+              </div>
+              <div style={{ fontSize: 12, color: "var(--color-text-primary)" }}>{c.date}<br /><span style={{ color: "var(--color-text-secondary)" }}>{c.location}</span></div>
+              <div style={{ textAlign: "right" }}>
+                <span style={{ fontSize: 11, fontWeight: 500, padding: "2px 8px", borderRadius: 5, background: `${c.color}14`, color: c.color }}>{c.priority}</span>
+              </div>
+            </div>
+          ))}
+          <div style={{ padding: "14px 16px", background: "var(--color-background-secondary)", borderRadius: 10, fontSize: 12, color: "var(--color-text-secondary)", lineHeight: 1.6, marginTop: 16 }}>
+            <strong style={{ color: "var(--color-text-primary)" }}>Boston trip plan (June 2026):</strong> Combine BIO International with in-person meetings: Sanofi (via [Investor]), Kailera (Waltham), Amgen/Regeneron/Takeda (Cambridge R&D hubs), MassBio events. Pre-schedule 15-20 BIO Partnering meetings. Plan 5 days minimum.
+          </div>
+        </div>
+      )}
+
+      {tab === "investors" && (
+        <div>
+          <div style={{ fontSize: 13, color: "var(--color-text-secondary)", marginBottom: 16, lineHeight: 1.6 }}>
+            Boston/Cambridge is the world's densest biotech VC cluster. These firms have either directly invested in obesity/metabolic companies, have portfolio companies in [Client]'s space, or provide strategic value as ecosystem connectors. Prioritize firms with demonstrated obesity conviction.
+          </div>
+
+          <div style={{ fontSize: 14, fontWeight: 500, color: "var(--color-text-primary)", marginBottom: 8, borderBottom: `2px solid ${TEAL}`, paddingBottom: 4 }}>Tier A — Obesity conviction investors (have backed obesity companies)</div>
+
+          {[
+            { name: "Atlas Venture", location: "Cambridge, MA", color: "#534AB7", focus: "Seed/Series A biotech company creation", obesityLink: "Co-led Kailera's $400M Series A (obesity-only). Portfolio includes Versanis (sold to Lilly for body composition in obesity). Co-hosts Science2Startup Symposium.", keyPeople: "Bruce Booth, Partner (biotech thought leader, widely followed blog); Jean-Fran\u00E7ois Bharel, Partner", approach: "Science2Startup symposium application; BIO International; Bruce Booth is publicly accessible via his LifeSciVC blog", relevance: "Atlas builds companies from scratch around novel science. [Client]'s novel target platform — with academic origins ([Academic Partner]/[University Partner]) and clinical data — fits their model. Atlas could help [Client] establish a US entity or co-invest in a US-focused clinical program." },
+            { name: "Bain Capital Life Sciences", location: "Boston, MA", color: "#003865", focus: "Growth-stage life sciences", obesityLink: "Co-led Kailera's $400M Series A and $600M Series B. Deep obesity conviction. Chris Gordon (Partner, Global Co-Head) publicly endorsed obesity as a multi-generational investment opportunity.", keyPeople: "Chris Gordon, Partner & Global Co-Head of PE; Andrew Kaplan, Partner (Kailera board)", approach: "Via Kailera relationship or BIO Partnering; warm intro through shared investor networks", relevance: "Bain Capital could lead or co-lead [Client]'s Series A (\u20AC6-8M). Their Kailera investment shows comfort with obesity-stage companies. [Client]'s non-incretin differentiation is exactly what Bain would want alongside their GLP-1 bet at Kailera." },
+            { name: "RTW Investments", location: "New York (Boston-active)", color: "#185FA5", focus: "Multi-stage biotech, strong metabolic focus", obesityLink: "Co-led Kailera's $400M Series A. Active in metabolic/obesity deal flow. Crossover investor (private + public).", keyPeople: "Roderick Wong, MD, Founder & CIO", approach: "BIO Partnering; investor conferences", relevance: "RTW's involvement in Kailera signals deep obesity conviction. As a crossover fund, they could provide capital and public-market expertise as [Client] approaches later stages." },
+            { name: "OrbiMed", location: "New York (Boston-active)", color: "#0F6E56", focus: "Multi-stage healthcare, largest dedicated life sciences VC", obesityLink: "Led multiple obesity/metabolic rounds including QL Biopharm (GLP-1, $73M Series C). Active across the obesity value chain. $1B+ in AUM.", keyPeople: "Multiple partners covering metabolic", approach: "BIO Partnering; orbimed.com submissions", relevance: "OrbiMed's scale and multi-stage approach means they could enter at [Client]'s current stage and follow through to Phase 2b. Their European presence (London office) is an advantage for a French company." },
+            { name: "Novo Holdings", location: "Copenhagen (Boston-active via Novo Nordisk)", color: "#0067A5", focus: "Novo Nordisk Foundation investment arm", obesityLink: "Co-led Metsera's Series A ($290M). Direct pipeline to Novo Nordisk for partnering. Invests in companies that could complement Novo's portfolio.", keyPeople: "Multiple partners; Novo Seeds team for early-stage", approach: "novoholdings.dk; BIO Partnering; potentially via [CMO]'s Novo network", relevance: "Strategic investor that directly connects to Novo Nordisk. An investment from Novo Holdings would effectively be a soft signal of Novo's interest and could fast-track BD discussions with the parent company." },
+          ].map((inv, i) => (
+            <div key={i} style={{ background: "var(--color-background-primary)", border: "0.5px solid var(--color-border-tertiary)", borderLeft: `3px solid ${inv.color}`, borderRadius: "0 var(--border-radius-lg) var(--border-radius-lg) 0", marginBottom: 8, padding: "12px 16px" }}>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 8 }}>
+                <div>
+                  <span style={{ fontWeight: 500, fontSize: 14, color: "var(--color-text-primary)" }}>{inv.name}</span>
+                  <span style={{ fontSize: 12, color: "var(--color-text-tertiary)", marginLeft: 8 }}>{inv.location}</span>
+                </div>
+                <span style={{ fontSize: 11, color: inv.color, background: `${inv.color}14`, padding: "1px 7px", borderRadius: 5, fontWeight: 500 }}>{inv.focus}</span>
+              </div>
+              <div style={{ display: "grid", gridTemplateColumns: "minmax(0,1fr) minmax(0,1fr)", gap: 12, fontSize: 12 }}>
+                <div>
+                  <div style={{ fontWeight: 500, color: "var(--color-text-secondary)", fontSize: 11, textTransform: "uppercase", marginBottom: 4 }}>Obesity track record</div>
+                  <div style={{ color: "var(--color-text-primary)", lineHeight: 1.5, marginBottom: 10 }}>{inv.obesityLink}</div>
+                  <div style={{ fontWeight: 500, color: "var(--color-text-secondary)", fontSize: 11, textTransform: "uppercase", marginBottom: 4 }}>Key people</div>
+                  <div style={{ color: "var(--color-text-primary)", lineHeight: 1.5 }}>{inv.keyPeople}</div>
+                </div>
+                <div>
+                  <div style={{ fontWeight: 500, color: "var(--color-text-secondary)", fontSize: 11, textTransform: "uppercase", marginBottom: 4 }}>Relevance for [Client]</div>
+                  <div style={{ color: "var(--color-text-primary)", lineHeight: 1.5, marginBottom: 10 }}>{inv.relevance}</div>
+                  <div style={{ fontWeight: 500, color: "var(--color-text-secondary)", fontSize: 11, textTransform: "uppercase", marginBottom: 4 }}>Approach</div>
+                  <div style={{ color: "var(--color-text-secondary)", lineHeight: 1.5 }}>{inv.approach}</div>
+                </div>
+              </div>
+            </div>
+          ))}
+
+          <div style={{ fontSize: 14, fontWeight: 500, color: "var(--color-text-primary)", marginBottom: 8, marginTop: 20, borderBottom: `2px solid ${GOLD}`, paddingBottom: 4 }}>Tier B — Boston life sciences VCs (strong biotech focus, potential metabolic interest)</div>
+
+          {[
+            { name: "Third Rock Ventures", location: "Boston, MA (Newbury St)", color: "#993C1D", focus: "Company creation, Series A biotech", obesityLink: "Created and funded multiple cardiometabolic companies. Portfolio includes Relay Therapeutics, Karuna. Known for building companies around novel biology from academic labs.", keyPeople: "Abbie Celniker, Partner; multiple founding partners", approach: "Science2Startup; warm intro through academic/KOL network", relevance: "Third Rock builds companies from novel academic science. [Client]'s academic origins (Prof. [CSO Name] / [Academic Partner] / Univ. Burgundy) and the novel target discovery are the kind of foundational biology Third Rock values. Could help [Client] create a US subsidiary." },
+            { name: "RA Capital Management", location: "Boston, MA", color: "#639922", focus: "Multi-stage (seed through public), evidence-based investing", obesityLink: "Active across metabolic disease. Co-hosts Science2Startup with Atlas. Joshua Resnick (MD) leads S2S. Portfolio spans rare disease to metabolic.", keyPeople: "Joshua Resnick, Managing Director; Peter Kolchinsky, PhD, Founder", approach: "Science2Startup; racap.com; BIO investor meetings", relevance: "RA Capital's evidence-based approach aligns well with [Client]'s data-rich story (preclinical + clinical safety + early efficacy). Their seed-to-public range means they could enter now and follow through." },
+            { name: "F-Prime Capital", location: "Cambridge, MA", color: "#854F0B", focus: "Early-stage life sciences (Fidelity-affiliated)", obesityLink: "Active in biotech seed/Series A. Co-hosts Science2Startup. Ben Auspitz (Partner) focuses on therapeutics.", keyPeople: "Ben Auspitz, Partner", approach: "Science2Startup; f-prime.com; BIO Partnering", relevance: "Fidelity-affiliated gives F-Prime both capital depth and public market expertise. Strong local presence in Cambridge for ongoing support." },
+            { name: "Polaris Partners", location: "Boston, MA", color: "#3B6D11", focus: "Early-stage life sciences and tech", obesityLink: "Amir Nashat (Managing Partner) active in therapeutics. Portfolio includes metabolic and rare disease companies. Frequent Atlas co-investor.", keyPeople: "Amir Nashat, Managing Partner", approach: "BIO Partnering; warm intro through Atlas/RA network", relevance: "Polaris frequently co-invests with Atlas and RA Capital. If either of those firms shows interest, Polaris is a natural syndicate partner." },
+            { name: "Flagship Pioneering", location: "Cambridge, MA", color: "#003E7E", focus: "Company creation from internal ideation (created Moderna)", obesityLink: "Built Moderna, Generate Biomedicines, Lila. While typically building from internal science, has invested in external companies with novel platforms.", keyPeople: "Noubar Afeyan, PhD, Founder & CEO", approach: "Typically builds internally; approach via scientific network or MassBio", relevance: "Long shot but high value. Flagship's thesis is around platform biology — [Client]'s novel target platform (immortalized taste bud cells, multiple molecule families) could interest them. The platform goes beyond [Lead Compound] to include pet obesity, inflammation, and next-gen agonists." },
+          ].map((inv, i) => (
+            <div key={i} style={{ background: "var(--color-background-primary)", border: "0.5px solid var(--color-border-tertiary)", borderLeft: `3px solid ${inv.color}`, borderRadius: "0 var(--border-radius-lg) var(--border-radius-lg) 0", marginBottom: 8, padding: "12px 16px" }}>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 8 }}>
+                <div>
+                  <span style={{ fontWeight: 500, fontSize: 14, color: "var(--color-text-primary)" }}>{inv.name}</span>
+                  <span style={{ fontSize: 12, color: "var(--color-text-tertiary)", marginLeft: 8 }}>{inv.location}</span>
+                </div>
+                <span style={{ fontSize: 11, color: inv.color, background: `${inv.color}14`, padding: "1px 7px", borderRadius: 5, fontWeight: 500 }}>{inv.focus}</span>
+              </div>
+              <div style={{ display: "grid", gridTemplateColumns: "minmax(0,1fr) minmax(0,1fr)", gap: 12, fontSize: 12 }}>
+                <div>
+                  <div style={{ fontWeight: 500, color: "var(--color-text-secondary)", fontSize: 11, textTransform: "uppercase", marginBottom: 4 }}>Metabolic/obesity link</div>
+                  <div style={{ color: "var(--color-text-primary)", lineHeight: 1.5, marginBottom: 10 }}>{inv.obesityLink}</div>
+                  <div style={{ fontWeight: 500, color: "var(--color-text-secondary)", fontSize: 11, textTransform: "uppercase", marginBottom: 4 }}>Key people</div>
+                  <div style={{ color: "var(--color-text-primary)", lineHeight: 1.5 }}>{inv.keyPeople}</div>
+                </div>
+                <div>
+                  <div style={{ fontWeight: 500, color: "var(--color-text-secondary)", fontSize: 11, textTransform: "uppercase", marginBottom: 4 }}>Relevance for [Client]</div>
+                  <div style={{ color: "var(--color-text-primary)", lineHeight: 1.5, marginBottom: 10 }}>{inv.relevance}</div>
+                  <div style={{ fontWeight: 500, color: "var(--color-text-secondary)", fontSize: 11, textTransform: "uppercase", marginBottom: 4 }}>Approach</div>
+                  <div style={{ color: "var(--color-text-secondary)", lineHeight: 1.5 }}>{inv.approach}</div>
+                </div>
+              </div>
+            </div>
+          ))}
+
+          <div style={{ fontSize: 14, fontWeight: 500, color: "var(--color-text-primary)", marginBottom: 8, marginTop: 20, borderBottom: "2px solid var(--color-border-secondary)", paddingBottom: 4 }}>Tier C — Corporate VCs and strategic investors</div>
+
+          {[
+            { name: "Sanofi Ventures", location: "Cambridge, MA", color: "#7B2D8E", focus: "Corporate VC, cardiometabolic + immunology", obesityLink: "Invested in NodThera (cardiometabolic inflammation in obese patients), Diagonal Therapeutics ($125M Series B), Korsana ($175M). Active in Boston ecosystem.", keyPeople: "CVC team at Cambridge Crossing office", approach: "Via [Investor Name] ([Client] investor, ex-Sanofi) \u2014 DIRECT WARM INTRO", relevance: "Most accessible CVC for [Client] given the [Investor] connection. Sanofi Ventures investment would signal strategic interest and could lead to partnering discussions with Sanofi's BD team. NodThera overlap (inflammation in obesity) creates natural syndicate logic." },
+            { name: "Pfizer Ventures", location: "New York / Cambridge", color: "#0093D0", focus: "Corporate VC, strategic portfolio building", obesityLink: "Pfizer declared cardiometabolic as strategic priority. Ventures arm invests in pipeline-adjacent companies. Previously invested in Metsera-adjacent companies.", keyPeople: "Ventures team", approach: "Via [Advisor] (ex-Pfizer) or pfizer.com/about/partners", relevance: "Pfizer Ventures investment would fast-track BD conversations with Pfizer's cardiometabolic S&E team. Strategic alignment with Pfizer's need for non-incretin differentiation." },
+            { name: "Novo Seeds (Novo Holdings)", location: "Copenhagen (Boston-active)", color: "#0067A5", focus: "Early-stage arm of Novo Holdings", obesityLink: "Invests in seed/early companies that could complement Novo Nordisk's portfolio. Direct pipeline to Novo Nordisk BD team.", keyPeople: "Novo Seeds team", approach: "Via [CMO] (ex-Novo) or novoseeds.com", relevance: "The ultimate strategic investor for [Client]. A Novo Seeds investment is effectively a soft signal of Novo Nordisk's interest and creates a direct BD channel. [Client]'s post-semaglutide rebound data makes this especially compelling." },
+            { name: "Mission BioCapital", location: "Cambridge, MA", color: "#BA7517", focus: "Pre-seed/seed, Platinum Program for early-stage biotechs", obesityLink: "2025 Platinum Program invested in Overture Therapeutics (Cambridge, precision antibodies for obesity/cardiometabolic). 2026 program now accepting applications. AbbVie is a new sponsor.", keyPeople: "Jennifer Griffin, PhD, Partner", approach: "Apply to 2026 Platinum Program (applications open now); missionbiocapital.com", relevance: "Lower capital but high ecosystem value. Platinum Program provides lab space, mentorship, discovery services, and connections to AbbVie (new sponsor) and other pharma. Could help [Client] establish US presence." },
+          ].map((inv, i) => (
+            <div key={i} style={{ background: "var(--color-background-primary)", border: "0.5px solid var(--color-border-tertiary)", borderLeft: `3px solid ${inv.color}`, borderRadius: "0 var(--border-radius-lg) var(--border-radius-lg) 0", marginBottom: 8, padding: "12px 16px" }}>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 8 }}>
+                <div>
+                  <span style={{ fontWeight: 500, fontSize: 14, color: "var(--color-text-primary)" }}>{inv.name}</span>
+                  <span style={{ fontSize: 12, color: "var(--color-text-tertiary)", marginLeft: 8 }}>{inv.location}</span>
+                </div>
+                <span style={{ fontSize: 11, color: inv.color, background: `${inv.color}14`, padding: "1px 7px", borderRadius: 5, fontWeight: 500 }}>{inv.focus}</span>
+              </div>
+              <div style={{ display: "grid", gridTemplateColumns: "minmax(0,1fr) minmax(0,1fr)", gap: 12, fontSize: 12 }}>
+                <div>
+                  <div style={{ fontWeight: 500, color: "var(--color-text-secondary)", fontSize: 11, textTransform: "uppercase", marginBottom: 4 }}>Obesity / metabolic link</div>
+                  <div style={{ color: "var(--color-text-primary)", lineHeight: 1.5, marginBottom: 10 }}>{inv.obesityLink}</div>
+                  <div style={{ fontWeight: 500, color: "var(--color-text-secondary)", fontSize: 11, textTransform: "uppercase", marginBottom: 4 }}>Key people</div>
+                  <div style={{ color: "var(--color-text-primary)", lineHeight: 1.5 }}>{inv.keyPeople}</div>
+                </div>
+                <div>
+                  <div style={{ fontWeight: 500, color: "var(--color-text-secondary)", fontSize: 11, textTransform: "uppercase", marginBottom: 4 }}>Relevance for [Client]</div>
+                  <div style={{ color: "var(--color-text-primary)", lineHeight: 1.5, marginBottom: 10 }}>{inv.relevance}</div>
+                  <div style={{ fontWeight: 500, color: "var(--color-text-secondary)", fontSize: 11, textTransform: "uppercase", marginBottom: 4 }}>Approach</div>
+                  <div style={{ color: "var(--color-text-secondary)", lineHeight: 1.5 }}>{inv.approach}</div>
+                </div>
+              </div>
+            </div>
+          ))}
+
+          <div style={{ padding: "14px 16px", background: "var(--color-background-secondary)", borderRadius: 10, fontSize: 12, color: "var(--color-text-secondary)", lineHeight: 1.6, marginTop: 16 }}>
+            <strong style={{ color: "var(--color-text-primary)" }}>Investor outreach strategy:</strong> (1) <strong>Highest priority:</strong> Novo Seeds/Holdings via [CMO] and Sanofi Ventures via [Investor] — these are strategic investors that double as BD channels. (2) <strong>Atlas + Bain Capital:</strong> Both backed Kailera and have proven obesity conviction. [Client]'s non-incretin mechanism is portfolio-complementary to their Kailera bet. (3) <strong>Science2Startup:</strong> Annual event co-hosted by Atlas, RA Capital, and F-Prime — apply for 2026/2027 cycle. (4) <strong>Mission BioCapital Platinum Program:</strong> 2026 applications are open now. Low capital but high ecosystem access including AbbVie sponsorship. (5) Time investor outreach to coincide with MAD data completion (Dec 2026) for maximum leverage.
+          </div>
+        </div>
+      )}
+
+      {tab === "familyoffices" && (
+        <div>
+          <div style={{ fontSize: 13, color: "var(--color-text-secondary)", marginBottom: 16, lineHeight: 1.6 }}>
+            Family offices invest their own capital, have no fund lifecycle pressure, and can take a longer view on clinical timelines. [Client] has a unique advantage: an existing Saudi investor ([Existing Investor]) who opens the door to Gulf family offices in the region with the world's highest obesity prevalence.
+          </div>
+
+          <div style={{ fontSize: 14, fontWeight: 500, color: "var(--color-text-primary)", marginBottom: 8, borderBottom: `2px solid ${TEAL}`, paddingBottom: 4 }}>GCC / MENA — Highest priority (via [Existing Investor])</div>
+
+          {[
+            { name: "[Existing Investor] Network (Existing Investor)", loc: "Saudi Arabia", color: "#0D7377", angle: "Ask [Existing Investor] to host a private dinner for 5-8 Gulf family offices. He's the single most valuable asset for family office outreach — Gulf networks are tight-knit and referral-based.", access: "Direct — existing shareholder", priority: "THIS MONTH" },
+            { name: "PIF / Sanabil Investments", loc: "Riyadh, Saudi Arabia", color: "#003865", angle: "PIF allocated $4B for life sciences. [Client]'s Phase 2b includes Saudi Arabia as clinical trial geography — aligns with Vision 2030. Sanabil is PIF's VC arm for early-stage.", access: "Via [Existing Investor]; Saudi BIO delegation", priority: "Before BIO" },
+            { name: "Abdul Latif Jameel Health", loc: "Jeddah / Boston, MA", color: "#BA7517", angle: "Healthcare arm of Jameel family. Dual presence in Saudi AND Boston (MIT Jameel Clinic). Invests in health innovation globally. [Client]'s academic origins resonate.", access: "[Existing Investor] intro + Boston direct at MIT Jameel", priority: "Before BIO" },
+            { name: "Mubadala Investment Company", loc: "Abu Dhabi, UAE", color: "#003865", angle: "Invested $3B+ in global biotech (BioNTech, Moderna). Operates hospitals across UAE. Could provide capital AND clinical trial site access for Phase 2b.", access: "Via [Existing Investor] Gulf network; Arab Health (Dubai, Jan)", priority: "H2 2026" },
+            { name: "Olayan Group", loc: "Riyadh / New York / London", color: "#BA7517", angle: "One of largest MENA family offices. Healthcare is a stated focus. Multi-city presence enables both Gulf and US engagement.", access: "Via [Existing Investor]", priority: "H2 2026" },
+          ].map((fo, i) => (
+            <div key={i} style={{ background: "var(--color-background-primary)", border: "0.5px solid var(--color-border-tertiary)", borderLeft: `3px solid ${fo.color}`, borderRadius: "0 var(--border-radius-lg) var(--border-radius-lg) 0", marginBottom: 8, padding: "12px 16px" }}>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 6 }}>
+                <div><span style={{ fontWeight: 500, fontSize: 14, color: "var(--color-text-primary)" }}>{fo.name}</span><span style={{ fontSize: 12, color: "var(--color-text-tertiary)", marginLeft: 8 }}>{fo.loc}</span></div>
+                <span style={{ fontSize: 11, fontWeight: 500, padding: "2px 8px", borderRadius: 5, background: fo.priority === "THIS MONTH" ? "#E1F5EE" : fo.priority === "Before BIO" ? "#FAEEDA" : "var(--color-background-secondary)", color: fo.priority === "THIS MONTH" ? "#085041" : fo.priority === "Before BIO" ? "#633806" : "var(--color-text-secondary)" }}>{fo.priority}</span>
+              </div>
+              <div style={{ fontSize: 12, color: "var(--color-text-primary)", lineHeight: 1.5, marginBottom: 4 }}>{fo.angle}</div>
+              <div style={{ fontSize: 11, color: "var(--color-text-tertiary)" }}>{fo.access}</div>
+            </div>
+          ))}
+
+          <div style={{ fontSize: 14, fontWeight: 500, color: "var(--color-text-primary)", marginBottom: 8, marginTop: 20, borderBottom: `2px solid ${GOLD}`, paddingBottom: 4 }}>US & Global — Via conferences and direct outreach</div>
+
+          {[
+            { name: "Horizons Ventures (Li Ka-shing)", loc: "Hong Kong / global", color: "#534AB7", angle: "Most prolific family office in biotech. Portfolio: Moderna (early), Impossible Foods. Prefers platform technologies — [Client]'s novel target platform fits.", access: "horizonsventures.com; BIO Partnering" },
+            { name: "Tao Capital (Pritzker Family)", loc: "San Francisco, CA", color: "#534AB7", angle: "Largest holding is Madrigal Pharma (metabolic disease). Metabolic conviction proven. Patient capital, invests seed through growth.", access: "taocap.com; RESI conference" },
+            { name: "Santé Ventures", loc: "Austin, TX", color: "#0D7377", angle: "MD Omar Khalil: 'Five years ago you couldn't get a VC meeting for weight loss.' Now sees metabolic medicine as defining theme. Healthcare-only.", access: "santemed.com; RESI; JP Morgan Week" },
+            { name: "Rockefeller Capital (David Song, MD)", loc: "New York, NY", color: "#534AB7", angle: "Runs Heart & Health ETF investing in obesity/cardiometabolic. 25 years biotech experience. Can evaluate [Client]'s science directly.", access: "rockefellercapitalmanagement.com; investor conferences" },
+          ].map((fo, i) => (
+            <div key={i} style={{ background: "var(--color-background-primary)", border: "0.5px solid var(--color-border-tertiary)", borderLeft: `3px solid ${fo.color}`, borderRadius: "0 var(--border-radius-lg) var(--border-radius-lg) 0", marginBottom: 8, padding: "12px 16px" }}>
+              <div><span style={{ fontWeight: 500, fontSize: 14, color: "var(--color-text-primary)" }}>{fo.name}</span><span style={{ fontSize: 12, color: "var(--color-text-tertiary)", marginLeft: 8 }}>{fo.loc}</span></div>
+              <div style={{ fontSize: 12, color: "var(--color-text-primary)", lineHeight: 1.5, marginTop: 6, marginBottom: 4 }}>{fo.angle}</div>
+              <div style={{ fontSize: 11, color: "var(--color-text-tertiary)" }}>{fo.access}</div>
+            </div>
+          ))}
+
+          <div style={{ fontSize: 14, fontWeight: 500, color: "var(--color-text-primary)", marginBottom: 8, marginTop: 20, borderBottom: "2px solid var(--color-border-secondary)", paddingBottom: 4 }}>European — Pharma dynasty family offices</div>
+
+          {[
+            { name: "Boehringer Ingelheim Family (Von Baumbach)", loc: "Ingelheim, Germany", color: "#003865", angle: "BI is family-owned. Separate investment office makes early-stage bets complementary to BI pipeline. Survodutide synergy story works for both corporate and family channels.", access: "Via [Advisor] — DIRECT WARM INTRO to both corporate and family", warm: true },
+            { name: "Merck Family (E. Merck KG)", loc: "Darmstadt, Germany", color: "#003865", angle: "Merck KGaA is 70% family-owned. Healthcare division includes metabolic disease. Family holding makes direct investments alongside corporate pipeline.", access: "BIO-Europe (Cologne); Merck Innovation Center" },
+          ].map((fo, i) => (
+            <div key={i} style={{ background: "var(--color-background-primary)", border: "0.5px solid var(--color-border-tertiary)", borderLeft: `3px solid ${fo.color}`, borderRadius: "0 var(--border-radius-lg) var(--border-radius-lg) 0", marginBottom: 8, padding: "12px 16px" }}>
+              <div><span style={{ fontWeight: 500, fontSize: 14, color: "var(--color-text-primary)" }}>{fo.name}</span><span style={{ fontSize: 12, color: "var(--color-text-tertiary)", marginLeft: 8 }}>{fo.loc}</span></div>
+              <div style={{ fontSize: 12, color: "var(--color-text-primary)", lineHeight: 1.5, marginTop: 6, marginBottom: 4 }}>{fo.angle}</div>
+              <div style={{ fontSize: 11, color: fo.warm ? GOLD : "var(--color-text-tertiary)", fontWeight: fo.warm ? 500 : 400 }}>{fo.access}</div>
+            </div>
+          ))}
+
+          <div style={{ fontSize: 14, fontWeight: 500, color: "var(--color-text-primary)", marginBottom: 8, marginTop: 20, borderBottom: "2px solid var(--color-border-secondary)", paddingBottom: 4 }}>Access channels</div>
+
+          {[
+            { name: "RESI Boston September 2026", detail: "Only conference with dedicated Family Office BioForum luncheon. 400+ investors. Register at resiconference.com.", color: "#E24B4A" },
+            { name: "[Existing Investor] private dinner", detail: "Ask [Existing Investor] to host a presentation for 5-8 Gulf family offices. Single highest-ROI action for family office outreach.", color: "#E24B4A" },
+            { name: "Arab Health Dubai (Jan 2027)", detail: "56,000+ attendees. Draws Gulf family offices and sovereign wealth. Combine with private meetings via [Existing Investor].", color: "#BA7517" },
+            { name: "Family Office Summit Dubai (Oct 2026)", detail: "Dedicated family office event. 2025 featured healthcare as 'next major wealth frontier.'", color: "#BA7517" },
+            { name: "Existing investor LP referrals", detail: "Ask [Seed Investor], [Seed Investor 2], [Seed Investor 3]: 'Who in your LP base would be interested in an obesity deal?'", color: "#0D7377" },
+          ].map((ch, i) => (
+            <div key={i} style={{ display: "flex", gap: 10, marginBottom: 6, padding: "8px 12px", background: "var(--color-background-primary)", border: "0.5px solid var(--color-border-tertiary)", borderLeft: `3px solid ${ch.color}`, borderRadius: "0 6px 6px 0" }}>
+              <div><div style={{ fontWeight: 500, fontSize: 13, color: "var(--color-text-primary)" }}>{ch.name}</div><div style={{ fontSize: 12, color: "var(--color-text-secondary)", marginTop: 2 }}>{ch.detail}</div></div>
+            </div>
+          ))}
+
+          <div style={{ padding: "14px 16px", background: "var(--color-background-secondary)", borderRadius: 10, fontSize: 12, color: "var(--color-text-secondary)", lineHeight: 1.6, marginTop: 16 }}>
+            <strong style={{ color: "var(--color-text-primary)" }}>Full family office playbook available as a separate Word document</strong> with detailed profiles, pitch adaptation guidance, and the complete GCC strategy. The key takeaway: [Existing Investor] is the single most valuable asset for family office outreach. His Gulf network, combined with [Client]'s Phase 2b plan including Saudi Arabia, makes GCC family offices the highest-probability target.
+          </div>
+        </div>
+      )}
+
+      <div style={{ marginTop: 20, padding: "12px 14px", background: "var(--color-background-secondary)", borderRadius: 8, fontSize: 11, color: "var(--color-text-tertiary)", lineHeight: 1.5, textAlign: "center" }}>
+        [Client] [Entity] \u2022 [Client Address] \u2022 [ceo@client.com] \u2022 [phone]
+      </div>
+    </div>
+  );
+}
+
+
+ReactDOM.createRoot(document.getElementById("root")).render(React.createElement(App));
+</script>
+</body>
+</html>
